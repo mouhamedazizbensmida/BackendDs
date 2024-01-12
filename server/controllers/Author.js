@@ -62,28 +62,16 @@ export const Addpublication = async(req, res) => {
 // http://localhost:5001/Author/FindAllpublications
 // Token
 export const FindAllpublications = async (req, res) => {
-    try {
-        const id_user = req.auth.userId; 
+
+     
         try {
+            const id_user = req.auth.userId; 
             const publications = await User.findOne({ _id: id_user }).select('-_id -__v -nom -password')
               .populate({
                 path: 'ref',
                 select: '-_id -__v',
               })
-              .exec();
-          
-            if (!publications) {
-              return res.status(404).json({ error: 'User not found' });
-            }
-          
-            res.status(200).json({ publications });
-          } catch (e) {
-            res.status(500).json({
-              error: e.message,
-              message: 'Failed to retrieve publications',
-            });
-          }
-      
+              .exec();    
       if (!publications || publications.length === 0) {
         return res.status(404).json({ message: "publications Not Found" });
       }
@@ -98,7 +86,7 @@ export const FindAllpublications = async (req, res) => {
         message: "We can't fetch publications",
       });
     }
-  };
+    }
 /*Find All publications*/ 
 // http://localhost:5001/Author/Findonepublication
 // Token
@@ -116,7 +104,7 @@ export const Findonepublication = async (req, res) => {
               return res.status(404).json({ error: 'Publication not found in user references' });
             }
 
-            const publications = await Publication.find({_id: id_pub }).select('-_id -__v')  
+            const publications = await Publication.find({_id: id_pub }).select(' -__v ')  
                 
        
       if (!publications || publications.length === 0) {
