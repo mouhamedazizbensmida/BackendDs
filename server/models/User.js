@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-// import Joi from 'joi';
-// import mongooseIdValidator from 'mongoose-id-validator';
+
 const userSchema = new mongoose.Schema({
   nom: { type: String, required: true  },
   prenom: { type: String, required: true },
@@ -23,22 +22,6 @@ const userSchema = new mongoose.Schema({
     required: false,
   }],
 });
-// userSchema.plugin(mongooseIdValidator);
-//   // Joi validation schema
-// const userValidationSchema = Joi.object({
-//     email: Joi.string().email().required(),
-//     // other fields...
-//   });
-//   // Validate the user data before saving
-// userSchema.pre('save', async function (next) {
-//     try {
-//       await userValidationSchema.validateAsync(this.toObject());
-//       next();
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-//   );
   
 const User = mongoose.model('User', userSchema);
 export default User;
